@@ -1,9 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
-
+using TMPro;
 public class GameControl : MonoBehaviour
 {
-    private static GameObject whoWinsTextShadow, player1MoveText, player2MoveText;
+    private static GameObject player1MoveText, player2MoveText;
+    private static TextMeshProUGUI whoWinsText;
     private static GameObject player1, player2;
 
     public static int diceSideThrown = 0;
@@ -16,7 +17,7 @@ public class GameControl : MonoBehaviour
     void Start()
     {
         // Grab the UI text objects
-        whoWinsTextShadow = GameObject.Find("WhoWinsText");
+        whoWinsText     = GameObject.Find("WhoWinsText").GetComponent<TextMeshProUGUI>();
         player1MoveText   = GameObject.Find("Player1MoveText");
         player2MoveText   = GameObject.Find("Player2MoveText");
 
@@ -29,7 +30,7 @@ public class GameControl : MonoBehaviour
         player2.GetComponent<FollowThePath>().moveAllowed = false;
 
         // Show/hide the move prompts
-        whoWinsTextShadow .SetActive(false);
+        whoWinsText.gameObject.SetActive(false);
         player1MoveText   .SetActive(true);
         player2MoveText   .SetActive(false);
     }
@@ -67,8 +68,8 @@ public class GameControl : MonoBehaviour
         if (player1.GetComponent<FollowThePath>().waypointIndex
             == player1.GetComponent<FollowThePath>().waypoints.Length)
         {
-            whoWinsTextShadow.SetActive(true);
-            whoWinsTextShadow.GetComponent<Text>().text = "Player 1 Wins";
+            whoWinsText.gameObject.SetActive(true);
+            whoWinsText.text = "Player 1 Wins";
             gameOver = true;
         }
 
@@ -76,11 +77,11 @@ public class GameControl : MonoBehaviour
         if (player2.GetComponent<FollowThePath>().waypointIndex
             == player2.GetComponent<FollowThePath>().waypoints.Length)
         {
-            whoWinsTextShadow.SetActive(true);
+            whoWinsText.gameObject.SetActive(true);
             // hide any move prompts
             player1MoveText.SetActive(false);
             player2MoveText.SetActive(false);
-            whoWinsTextShadow.GetComponent<Text>().text = "Player 2 Wins";
+            whoWinsText.text = "Player 2 Wins";
             gameOver = true;
         }
     }
