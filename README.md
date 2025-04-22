@@ -1,6 +1,6 @@
 # Circus Dice Game
 
-**2–4 spēlētāju cirka tematikas galda spēle, izstrādāta Unity vidē.**
+**2 spēlētāju cirka tematikas galda spēle, izstrādāta Unity vidē.**
 
 Šajā spēlē spēlētāji met kauliņu un pārvietojas pa laukumam, sacenšoties, lai sasniegtu augstāko rezultātu pēc punktiem. Spēlei ir izstrādāta izvēlne ar tēlu izvēli, skaņu un video iestatījumiem.
 
