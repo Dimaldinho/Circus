@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50fce377d1d2608499e21f9496540e45, type: 3}
+  m_Name: New Character Database
+  m_EditorClassIdentifier: 
+  character:
+  - characterName: Warrior
+    characterSprite: {fileID: 21300000, guid: ca777892b6790264d80a02f976f2f7c6, type: 3}
+  - characterName: Reaper
+    characterSprite: {fileID: 21300000, guid: 76aa5cbe64eef2f43bb015e7f8573488, type: 3}
+  - characterName: Orc
+    characterSprite: {fileID: 21300000, guid: 90062234312b72b44960956bb30eed83, type: 3}
+  - characterName: Golem
+    characterSprite: {fileID: 21300000, guid: bbf4ae75df0712a439e91d70cf226694, type: 3}
+  - characterName: Angel
+    characterSprite: {fileID: 21300000, guid: dc28de79c353526489ddb7bb231d7b31, type: 3}
