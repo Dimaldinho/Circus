@@ -57,4 +57,13 @@ public class PauseManager : MonoBehaviour
         // In case this object is destroyed, ensure game isn't left paused
         Time.timeScale = 1f;
     }
+
+    public void RestartGame()
+    {
+        // 1) Un-pause so time flows normally
+        Time.timeScale = 1f;
+
+        GameControl.ResetGame();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
 }

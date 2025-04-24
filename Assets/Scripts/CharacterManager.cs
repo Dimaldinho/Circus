@@ -75,6 +75,7 @@ public class CharacterManager : MonoBehaviour
 
     public void ChangeScene(int sceneID)
     {
+        GameControl.ResetGame();
         SceneManager.LoadScene(sceneID);
     }
 }

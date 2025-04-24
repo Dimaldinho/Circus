@@ -26,6 +26,10 @@ public class GameControl : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        diceSideThrown       = 0;
+        player1StartWaypoint = 0;
+        player2StartWaypoint = 0;
+        gameOver             = false;
         // Grab the UI text objects
         whoWinsText     = GameObject.Find("WhoWinsText").GetComponent<TextMeshProUGUI>();
         player1MoveText   = GameObject.Find("Player1MoveText");
@@ -132,5 +136,12 @@ public class GameControl : MonoBehaviour
                 player2.GetComponent<FollowThePath>().moveAllowed = true;
                 break;
         }
+    }
+    public static void ResetGame()
+    {
+        diceSideThrown       = 0;
+        player1StartWaypoint = 0;
+        player2StartWaypoint = 0;
+        gameOver             = false;
     }
 }
