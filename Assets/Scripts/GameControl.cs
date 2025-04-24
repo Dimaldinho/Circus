@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections.Generic;
 public class GameControl : MonoBehaviour
 {
     private static GameObject player1MoveText, player2MoveText;
@@ -12,6 +13,15 @@ public class GameControl : MonoBehaviour
     public static int player2StartWaypoint = 0;
 
     public static bool gameOver = false;
+    static readonly Dictionary<int,int> jumps = new Dictionary<int,int> {
+    { 2, 10 },   // ladder
+    { 15, 22 },  
+    { 17, 5 },  
+    { 18, 11 },  
+    { 19, 24 },  
+    { 26,  14 },
+    { 27,  34 },
+    };
 
     // Use this for initialization
     void Start()
@@ -39,30 +49,54 @@ public class GameControl : MonoBehaviour
     void Update()
     {
         // Check if Player 1 has finished moving this turn
-        if (player1.GetComponent<FollowThePath>().waypointIndex
-            > player1StartWaypoint + diceSideThrown)
+
+    if (player1.GetComponent<FollowThePath>().waypointIndex
+        > player1StartWaypoint + diceSideThrown)
+    {
+        var ftp = player1.GetComponent<FollowThePath>();
+        ftp.moveAllowed = false;
+        player1MoveText.SetActive(false);
+        player2MoveText.SetActive(true);
+
+        // where they _actually_ landed
+        int landed = ftp.waypointIndex - 1;
+
+        // --- LADDER CHECK: if they landed on 6, jump to 24 ---
+        if (jumps.TryGetValue(landed, out int destination))
         {
-            player1.GetComponent<FollowThePath>().moveAllowed = false;
-            player1MoveText .SetActive(false);
-            player2MoveText .SetActive(true);
-            // Record where P1 ended up
-            player1StartWaypoint = player1
-                .GetComponent<FollowThePath>()
-                .waypointIndex - 1;
+            ftp.transform.position = ftp.waypoints[destination].position;
+            ftp.waypointIndex      = destination + 1;
+            landed                 = destination;
         }
+
+        // now store the start index for next turn
+        player1StartWaypoint = landed;
+    }
 
         // Check if Player 2 has finished moving this turn
         if (player2.GetComponent<FollowThePath>().waypointIndex
             > player2StartWaypoint + diceSideThrown)
         {
-            player2.GetComponent<FollowThePath>().moveAllowed = false;
-            player2MoveText .SetActive(false);
-            player1MoveText .SetActive(true);
-            // Record where P2 ended up
-            player2StartWaypoint = player2
-                .GetComponent<FollowThePath>()
-                .waypointIndex - 1;
+            var ftp = player2.GetComponent<FollowThePath>();
+            ftp.moveAllowed = false;
+            player2MoveText.SetActive(false);
+            player1MoveText.SetActive(true);
+
+            // where they _actually_ landed
+            int landed = ftp.waypointIndex - 1;
+
+            // --- LADDER CHECK: if they landed on 6, jump to 24 ---
+            if (jumps.TryGetValue(landed, out int destination))
+            {
+                ftp.transform.position = ftp.waypoints[destination].position;
+                ftp.waypointIndex      = destination + 1;
+                landed                 = destination;
+            }
+
+            // now store the start index for next turn
+            player2StartWaypoint = landed;
         }
+        
 
         // Check for win: P1 reaches the final waypoint
         if (player1.GetComponent<FollowThePath>().waypointIndex
