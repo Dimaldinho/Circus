@@ -13,6 +13,7 @@ public class CharacterManager : MonoBehaviour
     public CharacterDatabase characterDB;
     public Text nameText;
     public SpriteRenderer artworkSprite;
+    public Animator      artworkAnimator;
 
     private int selectedOption = 0;
     private string prefsKey;
@@ -58,6 +59,15 @@ public class CharacterManager : MonoBehaviour
         Character c = characterDB.GetCharacter(selectedOption);
         artworkSprite.sprite = c.characterSprite;
         nameText.text         = c.characterName;
+
+        if (artworkAnimator != null && c.animatorController != null)
+        {
+            // swap in the character's controller
+            artworkAnimator.runtimeAnimatorController = c.animatorController;
+            // restart the default state (layer 0) from the beginning
+            var state = artworkAnimator.GetCurrentAnimatorStateInfo(0);
+            artworkAnimator.Play(state.fullPathHash, 0, 0f);
+        }
     }
 
     public void ChangeScene(int sceneID)

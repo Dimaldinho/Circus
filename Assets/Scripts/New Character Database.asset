@@ -15,11 +15,16 @@ MonoBehaviour:
   character:
   - characterName: Warrior
     characterSprite: {fileID: 21300000, guid: ca777892b6790264d80a02f976f2f7c6, type: 3}
+    animatorController: {fileID: 9100000, guid: ccb107f1595283448b341ce7a7d91566, type: 2}
   - characterName: Reaper
     characterSprite: {fileID: 21300000, guid: 76aa5cbe64eef2f43bb015e7f8573488, type: 3}
+    animatorController: {fileID: 9100000, guid: 9f8a59ffe2b36754fa209dbea2a7d27f, type: 2}
   - characterName: Orc
     characterSprite: {fileID: 21300000, guid: 90062234312b72b44960956bb30eed83, type: 3}
+    animatorController: {fileID: 9100000, guid: 4133d613ff90fa044b704560f0be3105, type: 2}
   - characterName: Golem
     characterSprite: {fileID: 21300000, guid: bbf4ae75df0712a439e91d70cf226694, type: 3}
+    animatorController: {fileID: 9100000, guid: 5d75ab596d4a81e4bb29ae89bced786f, type: 2}
   - characterName: Angel
     characterSprite: {fileID: 21300000, guid: dc28de79c353526489ddb7bb231d7b31, type: 3}
+    animatorController: {fileID: 9100000, guid: 7b3e4f6f37844074790a926b199593b7, type: 2}
