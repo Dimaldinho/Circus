@@ -11,7 +11,7 @@ public class CharacterManager : MonoBehaviour
 
     [Header("Character Data and UI")]
     public CharacterDatabase characterDB;
-    public Text nameText;
+    public Text nameText ;
     public SpriteRenderer artworkSprite;
     public Animator      artworkAnimator;
 
@@ -58,7 +58,10 @@ public class CharacterManager : MonoBehaviour
     {
         Character c = characterDB.GetCharacter(selectedOption);
         artworkSprite.sprite = c.characterSprite;
-        nameText.text         = c.characterName;
+        if (nameText != null)
+            nameText.text = c.characterName;
+        else
+            Debug.LogWarning($"[{nameof(PlayerCharacter)}] nameText not assigned on {gameObject.name} – skipping.");
 
         if (artworkAnimator != null && c.animatorController != null)
         {
