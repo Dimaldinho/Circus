@@ -31,3 +31,6 @@ MonoBehaviour:
   - characterName: Mushroom
     characterSprite: {fileID: 1342543793, guid: 41828baa46d4d364581b812af72374e2, type: 3}
     animatorController: {fileID: 9100000, guid: 95a8c43e439db114e91d957b39c90793, type: 2}
+  - characterName: Knight
+    characterSprite: {fileID: 1969688868, guid: 0fa9e7569aa5b8d41b7d5ecbd1cc05b4, type: 3}
+    animatorController: {fileID: 9100000, guid: 535000499d15fa948ace0893f435f7b6, type: 2}
