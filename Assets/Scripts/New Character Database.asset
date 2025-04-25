@@ -28,3 +28,6 @@ MonoBehaviour:
   - characterName: Angel
     characterSprite: {fileID: 21300000, guid: dc28de79c353526489ddb7bb231d7b31, type: 3}
     animatorController: {fileID: 9100000, guid: 7b3e4f6f37844074790a926b199593b7, type: 2}
+  - characterName: Mushroom
+    characterSprite: {fileID: 1342543793, guid: 41828baa46d4d364581b812af72374e2, type: 3}
+    animatorController: {fileID: 9100000, guid: 95a8c43e439db114e91d957b39c90793, type: 2}

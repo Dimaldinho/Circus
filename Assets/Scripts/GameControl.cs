@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
+using System.Collections;
+
 public class GameControl : MonoBehaviour
 {
     private static GameObject player1MoveText, player2MoveText;
@@ -25,7 +27,8 @@ public class GameControl : MonoBehaviour
 
     // Use this for initialization
     void Start()
-    {
+    {   
+        
         diceSideThrown       = 0;
         player1StartWaypoint = 0;
         player2StartWaypoint = 0;
@@ -68,9 +71,23 @@ public class GameControl : MonoBehaviour
         // --- LADDER CHECK: if they landed on 6, jump to 24 ---
         if (jumps.TryGetValue(landed, out int destination))
         {
-            ftp.transform.position = ftp.waypoints[destination].position;
-            ftp.waypointIndex      = destination + 1;
-            landed                 = destination;
+            int jumpDistance = destination - landed;
+
+            // reset the FollowThePath index back to this tile,
+            // so it will walk from [landed] → [landed+1] → … → [destination]
+            ftp.waypointIndex      = landed + 1;
+            player1StartWaypoint   = landed;
+
+            // temporarily override diceSideThrown so your Update()
+            // will re-enter “moving” logic until we've walked jumpDistance steps
+            diceSideThrown = jumpDistance;
+            
+            // and resume walking
+            ftp.moveAllowed = true;
+
+            // bail out now; the normal “> startWaypoint + diceSideThrown”
+            // check will fire again once the walk-to-jump completes
+            return;
         }
 
         // now store the start index for next turn
@@ -91,11 +108,16 @@ public class GameControl : MonoBehaviour
 
             // --- LADDER CHECK: if they landed on 6, jump to 24 ---
             if (jumps.TryGetValue(landed, out int destination))
-            {
-                ftp.transform.position = ftp.waypoints[destination].position;
-                ftp.waypointIndex      = destination + 1;
-                landed                 = destination;
-            }
+        {   new WaitForSeconds(4f);
+            int jumpDistance = destination - landed;
+
+            ftp.waypointIndex      = landed + 1;
+            player2StartWaypoint   = landed;
+            diceSideThrown         = jumpDistance;
+            
+            ftp.moveAllowed        = true;
+            return;
+        }
 
             // now store the start index for next turn
             player2StartWaypoint = landed;
